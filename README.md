@@ -51,71 +51,70 @@ Git
 
 Setup Instructions
 ------------------
+
 1. Clone the Repository
    
-git clone https://github.com/Monika1235/microservices-project.git
+   git clone https://github.com/Monika1235/microservices-project.git
 
-cd microservices-project
+   cd microservices-project
 
 2. Configure Environment Variables
    
-Create a .env file in the root directory.
+ Create a .env file in the root directory for S3.
 
-WS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-AWS_REGION=your_region
-AWS_S3_BUCKET=your_bucket_name
+ WS_ACCESS_KEY_ID=your_access_key
+ 
+ AWS_SECRET_ACCESS_KEY=your_secret_key
+ 
+ AWS_REGION=your_region
+ 
+ AWS_S3_BUCKET=your_bucket_name
 
 3. Build Services
    
-If needed, build each service using Maven.
+ If needed, build each service using Maven.
 
-mvn clean package
+ mvn clean package
 
 4. Run the Application with Docker
    
-Start all services using Docker Compose.
+   Start all services using Docker Compose.
 
-docker compose up --build
+   docker compose up --build
 
 5. Stop the Application
    
-docker compose down
+   docker compose down
 
 Service Ports
 -------------
 
 User Service	8081
+
 Task Service	8082
+
 File Service	8083
+
 Notification Service	8084
+
 MongoDB	27017
 
 Example Workflow
 -----------------
 
-User registers through the User Service.
+ User registers through the User Service.
 
-Tasks are created and managed via the Task Service.
+ Tasks are created and managed via the Task Service.
 
-Files related to tasks are uploaded through the File Service and stored in AWS S3.
-
-Notifications are sent using the Notification Service.
+ Files related to tasks are uploaded through the File Service and stored in AWS S3.
+ 
+ Notifications are sent using the Notification Service.
 
 Future Improvements
 -------------------
 
-Implement service discovery
+ Implement service discovery
 
-Add centralized logging
+ Add centralized logging
 
-Add CI/CD pipeline using GitHub Actions
-
-Reverse Proxy Setup
--------------------
-
-Copy nginx configuration:
-
-sudo cp nginx/nginx.conf /etc/nginx/sites-available/microservices
-sudo ln -s /etc/nginx/sites-available/microservices /etc/nginx/sites-enabled/
-sudo systemctl restart nginx
+ Add CI/CD pipeline using GitHub Actions
