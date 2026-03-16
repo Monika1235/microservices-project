@@ -19,6 +19,7 @@ All services run as independent containers and communicate through REST APIs.
 
 Tech Stack
 ----------
+
 Java
 
 Spring Boot
@@ -51,30 +52,39 @@ Git
 Setup Instructions
 ------------------
 1. Clone the Repository
+   
 git clone https://github.com/Monika1235/microservices-project.git
+
 cd microservices-project
 
 2. Configure Environment Variables
+   
 Create a .env file in the root directory.
+
 WS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_REGION=your_region
 AWS_S3_BUCKET=your_bucket_name
 
-4. Build Services
+3. Build Services
+   
 If needed, build each service using Maven.
+
 mvn clean package
 
-6. Run the Application with Docker
+4. Run the Application with Docker
+   
 Start all services using Docker Compose.
+
 docker compose up --build
 
-7. Stop the Application
+5. Stop the Application
+   
 docker compose down
 
 Service Ports
 -------------
-Service	Port
+
 User Service	8081
 Task Service	8082
 File Service	8083
@@ -83,6 +93,7 @@ MongoDB	27017
 
 Example Workflow
 -----------------
+
 User registers through the User Service.
 
 Tasks are created and managed via the Task Service.
@@ -93,10 +104,18 @@ Notifications are sent using the Notification Service.
 
 Future Improvements
 -------------------
-Add API Gateway
 
 Implement service discovery
 
 Add centralized logging
 
 Add CI/CD pipeline using GitHub Actions
+
+Reverse Proxy Setup
+-------------------
+
+Copy nginx configuration:
+
+sudo cp nginx/nginx.conf /etc/nginx/sites-available/microservices
+sudo ln -s /etc/nginx/sites-available/microservices /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
