@@ -1,19 +1,11 @@
 Architecture
 ------------
 
-The application follows a microservices architecture where each service handles a specific responsibility.
+This project demonstrates a containerized microservices architecture deployed on an AWS EC2 instance using Docker Compose.
 
-Services included:
+An Nginx API gateway acts as a reverse proxy to route external client requests to internal microservices.
 
-User Service – Handles user management and authentication.
-
-Task Service – Manages tasks assigned to users.
-
-File Service – Handles file uploads and storage using AWS S3.
-
-Notification Service – Responsible for sending notifications.
-
-MongoDB – Database used by the services.
+The system includes multiple Spring Boot services communicating over a Docker network with MongoDB as the database.
 
 All services run as independent containers and communicate through REST APIs.
 
@@ -54,56 +46,64 @@ Setup Instructions
 
 1. Clone the Repository
    
-   git clone https://github.com/Monika1235/microservices-project.git
+git clone https://github.com/Monika1235/microservices-project.git
 
-   cd microservices-project
+cd microservices-project
 
 2. Configure Environment Variables
    
- Create a .env file in the root directory for S3.
+Create a .env file in the root directory for S3.
 
- WS_ACCESS_KEY_ID=your_access_key
+AWS_ACCESS_KEY_ID=your_access_key
  
- AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
  
- AWS_REGION=your_region
+AWS_REGION=your_region
  
- AWS_S3_BUCKET=your_bucket_name
+AWS_S3_BUCKET=your_bucket_name
 
 3. Build Services
    
- If needed, build each service using Maven.
+If needed, build each service using Maven.
 
- mvn clean package
+mvn clean package
 
 4. Run the Application with Docker
    
-   Start all services using Docker Compose.
+Start all services using Docker Compose.
 
-   docker compose up --build
+docker compose up --build
 
-5. Stop the Application
-   
-   docker compose down
+5.Access APIs
 
-Service Ports
--------------
+Example requests:
 
-User Service	8081
+http://<EC2_PUBLIC_IP>/users
 
-Task Service	8082
+http://<EC2_PUBLIC_IP>/tasks
 
-File Service	8083
+http://<EC2_PUBLIC_IP>/files/upload
 
-Notification Service	8084
+http://<EC2_PUBLIC_IP>/notifications
 
-MongoDB	27017
+Logging:
+-------
+
+The Nginx gateway logs incoming requests including:
+
+client IP
+
+upstream service
+
+response time
+
+HTTP status
 
 Example Workflow
 -----------------
 
  User registers through the User Service.
-
+ 
  Tasks are created and managed via the Task Service.
 
  Files related to tasks are uploaded through the File Service and stored in AWS S3.
@@ -118,3 +118,7 @@ Future Improvements
  Add centralized logging
 
  Add CI/CD pipeline using GitHub Actions
+
+ Introduce load balancing across service instances
+
+ Implement event-driven communication using message queues
