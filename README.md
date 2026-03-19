@@ -62,7 +62,7 @@ sudo docker compose up --build
 ```
 - Access APIs
 
-#### Example requests:
+#### Example Test Endpoints:
 
 - http://13.232.228.36/users
 
