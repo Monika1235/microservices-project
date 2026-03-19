@@ -85,6 +85,20 @@ sudo docker compose up --build
 - Files related to tasks are uploaded through the File Service and stored in AWS S3.
 - Notifications are sent using the Notification Service.
 ---
+### Challenges faced
+- NonExistentPath: Data directory /data/db not found while running mongod server
+  -Solution:
+  ```bash
+  sudo mkdir -p /data/db
+  sudo chown -R $USER:$USER /data/db
+  ```
+- Failed to bind host port for 0.0.0.0:27017 address already in use
+  -Solution:
+  ```bash
+  sudo systemctl stop mongod
+  lsof -i :27017
+  ```
+----
 ### Future Improvements
 - Implement service discovery
 - Add centralized logging
